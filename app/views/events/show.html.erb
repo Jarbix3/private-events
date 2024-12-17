@@ -1,0 +1,26 @@
+<h1><%= @event.title %></h1>
+
+<p><strong></strong> <%= @event.description %></p>
+<p><strong>Ubicacion:</strong> <%= @event.location %></p>
+<p><strong>Categoria:</strong> <%= @event.category %></p>
+<p><strong>Fecha y hora del evento:</strong> <%= @event.date.strftime("%d/%m/%Y %H:%M") %></p>
+<p><strong>Host:</strong> <%= @event.host.username %></p>
+
+<% if @event.attendees.any? %>
+    <h2>Asistentes:</h2>
+    <ul>
+        <% @event.attendees.each do |attendee| %>
+        <li><%= attendee.username %></li>
+        <% end %>
+    </ul>
+<% else %>
+    <p>No hay asistentes todavia</p>
+<% end %>
+<% if current_user == @event.host %>
+<%= link_to 'Editar', edit_event_path(@event), class: "button" %>
+<%= button_to 'Borrar', event_path(@event),onclick: "return confirm('SEGURO Q QERE BORRAR?');" , method: :delete, class: "button"%>
+<% end %>
+<% if user_signed_in? && current_user != @event.host%>
+<%= button_to 'Unirse', join_event_path(@event), method: :post, class: "button" %>
+<% end %>
+<%= link_to 'Volver a los eventos', events_path, class: "button" %>

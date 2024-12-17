@@ -1,0 +1,38 @@
+<header>
+  <h1> Events Logger</h1>
+  <div class="header-buttons">
+    <% if user_signed_in? %>
+      <%= link_to "NUEVO EVENTO", new_event_path %>
+      <%= link_to 'TOMARSELAS', destroy_user_session_path, method: :delete, class: 'danger'%>
+      <%= link_to 'EDITAR CUENTA', edit_user_registration_path, class: 'button'%>
+    <% else %>
+      <%= link_to 'CONECTATE', new_user_session_path, class: 'success'%> <br><br>
+      <%= link_to 'SI SOS NUEVO HACE CLICK', new_user_registration_path, class: 'success'%>
+    <% end %>
+  </div>
+</header>
+<body>
+
+<% if user_signed_in?%>
+<h3> Welcome <%= current_user.username %> </h3>
+
+
+
+<div class="event-container"><% @events.each do |event| %>
+<br>
+<div class="event">
+  <h2><%= link_to event.title, event %></h2>
+  <p class="description"><%= event.description %></p>
+  <div class="event-info">
+  <% if user_signed_in?%>
+  <p><small>LO ESCRIBIO: <%= event.host.username %></small></p>
+  <% end %>
+  <p><small>EL DIA: <%= event.date %></small></p>
+  </div>
+</div>
+<br>
+<% end %>
+</div>
+<% end %>
+
+</body>

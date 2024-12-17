@@ -1,0 +1,78 @@
+<%= simple_form_for(@event) do |f|%>
+
+<div class="field">
+    <div class="control">
+        <%= f.input :title,
+            label: "Titulo:",
+            input_html: { class: "string" },
+            wrapper: false, label_html: {class: "label" },
+            placeholder: "diego nos salvo y a la patria construyo",
+            autofocus: true,
+            :error => false%>
+
+    </div>
+    <% unless @event.errors[:title].empty?%>
+        <p class="help is-danger">ponele titulo gracias</p>
+    <% end %>
+</div>
+<br>
+<div class="field">
+    <div class="control">
+        <%= f.input :description,
+            label: "Describi tu evento: ",
+            input_html: { class: "textarea" },
+            wrapper: false, label_html: {class: "label" },
+            placeholder: "Si tuvieses que elegir 3 personas para comer un asado, ¿quienes serian?",
+            :error => false%>
+    </div>
+</div>
+<br>
+<br>
+<div class="field">
+    <div class="control">
+        <%= f.input :location,
+            label: "Ubicacion: ",
+            input_html: { class: "textarea" },
+            wrapper: false, label_html: {class: "label" },
+            placeholder: "En que lugar comerias ese asado?",
+            :error => false%>
+    </div>
+    <% unless @event.errors[:location].empty?%>
+        <p class="help is-danger">En que lugar sera el evento?</p>
+    <% end %>
+</div>
+<br>
+
+<br>
+<div class="field">
+    <div class="control">
+        <%= f.label :category, "Categoria", class: "label"%>
+        <%= f.select :category, options_for_select(["Evento musical","Evento deportivo","Evento gastronomico","Reunion Social","Evento empresarial","Evento artistico","Otros"]), {prompt: "Selecciona una categoria"}, {class: "input"}%>
+    </div>
+    <% unless @event.errors[:category].empty?%>
+        <p class="help is-danger">ponele un item pibe<%= @event.errors[:category].first%></p>
+    <% end %>
+</div>
+<br>
+
+<br>
+<div class="field">
+    <div class="control">
+        <%= f.input :date,
+            label: "Horario del evento: ",            
+            input_html: { class: "input" ,type: "datetime-local"},
+            wrapper: false, label_html: {class: "label" },
+            placeholder: "dd/mm/aa hh:mm",
+            :error => false%>
+    </div>
+    <% unless @event.errors[:date].empty?%>
+        <p class="help is-danger">En que horario se dara el evento?</p>
+    <% end %>
+</div>
+<br>
+<%= f.submit "POSTEAR EVENTO", class: "button "%>
+
+<br><br>
+
+<%= link_to 'VOLVER A VER LOS EVENTOS', events_path %>
+<% end %>
