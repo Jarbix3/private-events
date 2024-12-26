@@ -1,18 +1,37 @@
 * {margin: 0; padding: 0; box-sizing: border-box;}
 
 header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-around;
     align-items: center;
     gap : 10px;
     background-color: antiquewhite;
-    height: 4rem;
+    height: auto;
 }
 
-.header-buttons {
+header h1 {
+    grid-column: 1;
+    justify-content: flex-start;
+    font-size: 2rem;
+    padding: 10px;
+    font-weight: bold;
+    color: black;
+}
+
+header .header-buttons {
     display: flex;
     gap: 10px;
     padding: 10px;
+    grid-column: 3;
+    justify-content: flex-end;
+   
+}
+
+header .user-welcome {
+    display: flex; 
+    grid-column: 2;
+    justify-content: center;
    
 }
 .header-buttons button {
@@ -32,4 +51,45 @@ header {
     border: 1px solid black;
 
    
+}
+
+.event-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    justify-content: center;
+    padding-left:50px;
+    padding-right:50px;
+    margin-top: 60px;
+}
+
+.event {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid black;
+    height: auto;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    text-align: center;
+}
+
+.event h2{
+    text-align: center;
+    padding-left: 15px;
+    text-transform: uppercase;
+
+}
+
+.event .event-info {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 10px;
+    
+    height: auto;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    justify-content: center;
 }

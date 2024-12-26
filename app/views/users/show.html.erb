@@ -1,0 +1,32 @@
+<header>
+    <h1> Events Logger</h1>
+    <div class="header-buttons">
+        <%= link_to 'INICIO',root_path%>
+        <% if user_signed_in? %>
+            <%= link_to "NUEVO EVENTO", new_event_path %>
+            <%= link_to 'TOMARSELAS', destroy_user_session_path, method: :delete, class: 'danger'%>
+        <% if current_user != @user%>
+            <%= link_to 'EDITAR CUENTA', edit_user_registration_path, class: 'button'%>
+        <% end %>
+        <% end %>
+</header>
+<h1><%= @user.username %></h1>
+
+<p><strong>Email:</strong> <%= @user.email %></p>
+<p><strong>Fecha de creacion:</strong> <%= @user.created_at.strftime("%d/%m/%Y %H:%M") %></p>
+<p><strong>Ultima actualizacion:</strong> <%= @user.updated_at.strftime("%d/%m/%Y %H:%M") %></p>
+<p><strong>Eventos creados:</strong> <%= @user.created_events.count %></p>
+<p><strong>Eventos a los que asistio:</strong> <%= @user.attended_events.count %></p>
+<p><strong>Eventos de <%= @user.username%>:</strong></p>
+<% if @user.created_events.any? %>
+    <ul>
+        <% @user.created_events.each do |event| %>
+        <li><%= link_to event.title, event_path(event) %></li>
+        <% end %>
+    </ul>
+<% end%>
+
+<% if current_user == @user %>
+<%= link_to 'Editar', edit_user_registration_path, class: "button" %>
+<%= button_to 'Borrar', user_registration_path, method: :delete, data: { confirm: 'Estas seguro que queres borrar tu cuenta?' }, class: "button" %>
+<% end %>

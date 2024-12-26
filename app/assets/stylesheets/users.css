@@ -1,0 +1,17 @@
+ul {
+    list-style-type: none; /* Remove default bullet points */
+    padding-left: 0; /* Remove default padding */
+  }
+  
+  ul li {
+    padding-left: 20px; /* Add padding to create indentation */
+    margin-bottom: 5px; /* Optional: Add some space between list items */
+    position: relative;
+  }
+  
+  ul li::before {
+    content: "•"; /* Add a custom bullet point */
+    position: absolute;
+    left: 0;
+    color: black; /* Customize the color of the bullet point */
+  }

@@ -1,5 +1,10 @@
 <header>
   <h1> Events Logger</h1>
+  <div class="user-welcome">
+    <% if user_signed_in? %>
+    <h3> Welcome <%= current_user.username %> </h3>
+    <%end%>
+  </div>
   <div class="header-buttons">
     <% if user_signed_in? %>
       <%= link_to "NUEVO EVENTO", new_event_path %>
@@ -14,23 +19,24 @@
 <body>
 
 <% if user_signed_in?%>
-<h3> Welcome <%= current_user.username %> </h3>
 
 
 
 <div class="event-container"><% @events.each do |event| %>
-<br>
+
 <div class="event">
   <h2><%= link_to event.title, event %></h2>
   <p class="description"><%= event.description %></p>
+  <p><small>LO ESCRIBIO: <%= link_to event.host.username, event.host, class: 'button' %></small></p>
+    <p><small>EL DIA: <%= event.date %></small></p>
   <div class="event-info">
-  <% if user_signed_in?%>
-  <p><small>LO ESCRIBIO: <%= event.host.username %></small></p>
-  <% end %>
-  <p><small>EL DIA: <%= event.date %></small></p>
+    
+    <p><small>UBICACION: <%= event.location %></small></p>
+    <p><small>CATEGORIA: <%= event.category %></small></p>
+    <p><small>ASISTENTES: <%= event.attendees.count %></small></p>
   </div>
 </div>
-<br>
+
 <% end %>
 </div>
 <% end %>
